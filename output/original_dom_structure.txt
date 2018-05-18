@@ -1,0 +1,21 @@
+None:<class 'bs4.element.Doctype'>
+html:<class 'bs4.element.Tag'>
+t.Tag'>
+body:<class 'bs4.element.Tag'>
+
+None:<class 'bs4.element.NavigableString'>
+script:<class 'bs4.element.Tag'>
+None:<class 'bs4.element.NavigableString'>
+script:<class 'bs4.element.Tag'>
+None:<class 'bs4.element.NavigableString'>
+None:<class 'bs4.element.Comment'>
+script:<class 'bs4.element.Tag'>
+None:<class 'bs4.element.NavigableString'>
+script:<class 'bs4.element.Tag'>
+None:<class 'bs4.element.NavigableString'>
+script:<class 'bs4.element.Tag'>
+None:<class 'bs4.element.NavigableString'>
+script:<class 'bs4.element.Tag'>
+script:<class 'bs4.element.Tag'>
+None:<class 'bs4.element.NavigableString'>
+script:<class 'bs4.element.Tag'>
