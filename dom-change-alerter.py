@@ -4,6 +4,7 @@ from time import sleep
 from io import StringIO
 from pprint import pprint
 from bs4 import BeautifulSoup
+from pathlib import Path
 from urllib.request import urlopen
 
 
@@ -35,32 +36,40 @@ def tree_walker(soup, output_file):
 				tree_walker(child, output_file)
 
 
-def diff_output_files(path1, path2):
+def diff_output_files(path0, path1):
 	"""
 	Diffs output files and returns true if there are differences in the structure.
 	"""
+	contents0 = Path(path0).read_text()
+	contents1 = Path(path1).read_text()
 
-	# TODO: better comparison is needed because not all DOM changes are important for us.
-	return filecmp.cmp(path1, path2)
+	# TODO: Fix bug here.
+
+	pprint(contents0)
+	pprint(contents1)
+	return contents0 == contents1
 
 
 def main():
 
+	url = input("Enter a URL to monitor: ")
+	print("Fetching initial DOM structure...")
+
 	while True:
 
 		# Scrape first DOM structure.
-		orig_data = download_page("http://www.messenger.com/")
+		orig_data = download_page(url)
 		orig_soup = BeautifulSoup(orig_data, "lxml")
 
 		# Walk it and save output to file.
 		tree_walker(orig_soup, "output/original_dom_structure.txt")
 
 		print("Sleeping...")
-		sleep(20)
-		print("Unsleeping...")
+		sleep(3)
+		print("Fetching updated DOM structure...")
 
 		# Scrape second DOM structure.
-		updated_data = download_page("http://www.messenger.com/")
+		updated_data = download_page(url)
 		updated_soup = BeautifulSoup(updated_data, "lxml")
 
 		# Walk it and save output to file.
@@ -71,9 +80,9 @@ def main():
 		                                     "output/updated_dom_structure.txt")
 
 		if file_has_changed:
-			print("The DOM structure has changed.")
+			print("-> The DOM structure has changed.")
 		else:
-			print("No changes in the DOM structure yet.")
+			print("-> No changes in the DOM structure yet.")
 
 
 if __name__ == '__main__':
